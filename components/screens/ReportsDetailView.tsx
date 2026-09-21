@@ -1,0 +1,8 @@
+import { BarChart3 } from 'lucide-react'
+import SectionHeader from '@/components/primitives/SectionHeader'
+import AnalyticsStrip from '@/components/primitives/AnalyticsStrip'
+import DetailChart from '@/components/primitives/DetailChart'
+
+export default function ReportsDetailView() {
+  return <div className="view-enter"><SectionHeader eyebrow="CONTROLO" title="Reports & inteligência" subtitle="Relatórios executivos, indicadores e exportações para decisão." action="Criar report"/><div className="view-body"><AnalyticsStrip items={[{label:'Reports publicados',value:'36',delta:'+6 este mês',tone:'blue'},{label:'Leitores ativos',value:'184',delta:'+18,2%',tone:'purple'},{label:'Exportações',value:'412',delta:'Últimos 30 dias',tone:'green'},{label:'Agendados',value:'12',delta:'3 esta semana',tone:'amber'}]}/><div className="dashboard-grid grid-2col"><DetailChart title="Leitura executiva" subtitle="Acessos aos reports por semana" tone="blue"/><DetailChart title="Indicadores por domínio" subtitle="Comparativo de performance" tone="purple"/></div><div className="report-card-grid">{['Board Pack · Setembro','Mapa de risco trimestral','Relatório KYC consolidado','BNA · Acompanhamento regulatório'].map((item,i)=><div className="report-card" key={item}><div className={`report-cover cover-${i}`}><BarChart3 size={24}/><span>PDF</span></div><div><strong>{item}</strong><small>Atualizado hoje · {12+i} páginas</small><button className="text-action">Abrir relatório →</button></div></div>)}</div></div></div>
+}

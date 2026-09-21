@@ -1,0 +1,6 @@
+import SectionHeader from '@/components/primitives/SectionHeader'
+
+export default function NotificationsView() {
+  const notifications = [{title:'Reporte prudencial vence em 5 dias',meta:'Obrigação · BNA · há 12 min',tone:'critical'},{title:'Novo normativo UIF requer avaliação',meta:'Monitor regulatório · há 46 min',tone:'warning'},{title:'Controlo AML-042 abaixo do limite',meta:'Controlos · há 2 h',tone:'info'}]
+  return <div className="view-enter"><SectionHeader eyebrow="CENTRO DE NOTIFICAÇÕES" title="Notificações" subtitle="Reveja ocorrências, atribua responsáveis e marque alertas como tratados." action="Marcar todas como lidas"/><div className="view-body"><div className="notifications-toolbar"><span>3 notificações por tratar</span><button className="btn btn-secondary">Filtrar notificações</button></div><div className="card notification-center">{notifications.map((item)=><div className="notification-item" key={item.title}><span className={`notification-dot ${item.tone}`}/><div><strong>{item.title}</strong><small>{item.meta}</small></div><button className="btn btn-ghost">Marcar como lida</button><button className="btn btn-primary">Abrir</button></div>)}</div></div></div>
+}

@@ -1,0 +1,11 @@
+'use client'
+
+import { useState } from 'react'
+import { X, CheckCircle2 } from 'lucide-react'
+import { formDefinitions } from '@/components/types'
+
+export default function FormModal({ action, onClose }: { action: string; onClose: () => void }) {
+  const definition = formDefinitions[action] || { eyebrow: 'OPAKUS', title: action, description: 'Preencha os dados para continuar.', fields: [{ label: 'Nome', placeholder: 'Introduza um nome' }, { label: 'Descrição', type: 'textarea', placeholder: 'Detalhes' }] }
+  const [submitted, setSubmitted] = useState(false)
+  return <div className="modal-backdrop" role="presentation" onMouseDown={(event) => { if (event.target === event.currentTarget) onClose() }}><section className="form-modal" role="dialog" aria-modal="true" aria-labelledby="form-modal-title"><button className="modal-close" onClick={onClose} aria-label="Fechar"><X size={18}/></button><span className="section-kicker">{definition.eyebrow}</span><h2 id="form-modal-title">{submitted ? 'Registo criado com sucesso' : definition.title}</h2>{submitted ? <div className="form-success"><CheckCircle2 size={34}/><p>Os dados foram validados e o registo foi adicionado ao workflow Opakus.</p><button className="btn btn-primary" onClick={onClose}>Concluir</button></div> : <><p className="form-description">{definition.description}</p><form onSubmit={(event) => { event.preventDefault(); setSubmitted(true) }}><div className="form-grid">{definition.fields.map((field) => <label key={field.label}>{field.label}{field.type === 'select' ? <select required defaultValue=""><option value="" disabled>Selecione uma opção</option>{field.options?.map((option) => <option key={option}>{option}</option>)}</select> : field.type === 'textarea' ? <textarea required placeholder={field.placeholder}/> : <input required type={field.type || 'text'} placeholder={field.placeholder}/>}</label>)}</div><div className="form-actions"><button type="button" className="btn btn-secondary" onClick={onClose}>Cancelar</button><button type="submit" className="btn btn-primary">Guardar registo</button></div></form></>}</section></div>
+}
